@@ -7,7 +7,7 @@ from rest_framework import status
 # Create your views here.
 @api_view(['GET'])
 def hello(request):
-    name = request.query_params.get('name', 'visitor')
+    visitor_name = request.query_params.get('visitor_name', 'visitor')
     client_ip = request.META.get('HTTP_X_FORWARDED_FOR') 
     if client_ip:
         client_ip = client_ip.split(',')[0]  # Take the first IP in the list
@@ -46,7 +46,7 @@ def hello(request):
         response = {
             'client_ip': client_ip,
             'location': city,
-            'greeting': f'Hello, {name}!, the temperature is {temperature} degrees celsius in {city}'
+            'greeting': f'Hello, {visitor_name}!, the temperature is {temperature} degrees celsius in {city}'
         }
 
         return Response(response)
